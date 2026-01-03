@@ -8,7 +8,7 @@ html, body, #root {
 
 /* Global background */
 body {
-  background-image: url("/tavern.png");
+  background-image: url("./assets/tavern.png");
   background-size: cover;        /* fill screen */
   background-position: center;   /* center it */
   background-repeat: no-repeat;

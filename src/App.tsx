@@ -4,7 +4,7 @@ import HistoryLog from './components/HistoryLog'
 import Coin from './components/Coin'
 
 function App() {
-  const [headsChance, setHeadsChance] = useState(20)
+  const [headsChance, setHeadsChance] = useState(100)
   const [flipTime, setFlipTime] = useState(2.0)
   const [comboMult, setComboMult] = useState(1.0)
   const [currentStreak, setCurrentStreak] = useState(0)
@@ -62,11 +62,12 @@ function App() {
   const chachingSoundRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    flipSoundRef.current = new Audio("/sfx/coin_flip.mp3");
-    landSoundRef.current = new Audio("/sfx/coin_land.mp3");
-    chachingSoundRef.current = new Audio("/sfx/chaching.mp3");
+    const base = import.meta.env.BASE_URL; // "/" locally, "/repo-name/" on gh-pages
 
-    // optional: slightly lower volume so it doesn’t blast
+    flipSoundRef.current = new Audio(`${base}sfx/coin_flip.mp3`);
+    landSoundRef.current = new Audio(`${base}sfx/coin_land.mp3`);
+    chachingSoundRef.current = new Audio(`${base}sfx/chaching.mp3`);
+
     flipSoundRef.current.volume = 0.4;
     landSoundRef.current.volume = 0.7;
     chachingSoundRef.current.volume = 0.5;
@@ -179,14 +180,15 @@ function App() {
     <>
       {showRickroll && (
         <div className="rickroll-overlay">
-          <img className="rickroll-gif" src="/rickroll.gif" alt="rickroll" />
+          <img className="rickroll-gif" src={`${import.meta.env.BASE_URL}rickroll.gif`} alt="rickroll" />
         </div>
       )}
 
       <div className="container">
         <div className="pane">
-          <h1>HEADS CHANCE: {headsChance}%</h1>
-
+          <div style={{backgroundColor: '#000', padding: '10px', borderRadius: '8px', marginBottom: '10px'}}>
+            <h1>HEADS CHANCE: {headsChance}%</h1>
+          </div>
           <div className="coin-launch-area">
             <div className="float-popup-layer">
               {floatPopups.map(popup => (
@@ -216,7 +218,9 @@ function App() {
           <HistoryLog entries={history} />
         </div>
         <div className="pane">
-          <h1>${formatMoney(currentMoneyCents)}</h1>
+          <div style={{backgroundColor: '#000', padding: '10px', borderRadius: '8px', marginBottom: '10px'}}>
+            <h1>${formatMoney(currentMoneyCents)}</h1>
+          </div>
           <div className="button-group">
             <button 
               disabled={chanceCostIndex >= chanceCostScalingCents.length - 1 || currentMoneyCents < chanceCost}
