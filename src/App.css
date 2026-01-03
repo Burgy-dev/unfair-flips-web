@@ -72,7 +72,7 @@ body {
   display: flex;
   justify-content: center;
   padding-bottom: 20px;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 @keyframes history-pop-in {
