@@ -4,7 +4,7 @@ import HistoryLog from './components/HistoryLog'
 import Coin from './components/Coin'
 
 function App() {
-  const [headsChance, setHeadsChance] = useState(100)
+  const [headsChance, setHeadsChance] = useState(20)
   const [flipTime, setFlipTime] = useState(2.0)
   const [comboMult, setComboMult] = useState(1.0)
   const [currentStreak, setCurrentStreak] = useState(0)
